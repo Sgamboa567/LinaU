@@ -11,6 +11,8 @@
             padding: 0;
             background: linear-gradient(to bottom, #f7f8fc, #ffffff);
             color: #333;
+            position: relative;
+            overflow-x: hidden;
         }
 
         header {
@@ -40,6 +42,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             padding: 1.5rem;
+            position: relative;
         }
 
         .card p {
@@ -68,6 +71,91 @@
             border-radius: 50%;
         }
 
+        .hidden-icons img {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.6;
+        }
+
+        .hidden-icons img:nth-child(1) {
+            top: 10%;
+            left: 5%;
+        }
+
+        .hidden-icons img:nth-child(2) {
+            top: 20%;
+            right: 10%;
+        }
+
+        .hidden-icons img:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+        }
+
+        .hidden-icons img:nth-child(4) {
+            bottom: 10%;
+            right: 15%;
+        }
+
+        .sunflowers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem auto;
+        }
+
+        .sunflowers img {
+            width: 80px;
+            height: 80px;
+            margin: 0 10px;
+        }
+
+        .quote {
+            margin: 2rem auto;
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        .quote span {
+            display: block;
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #4a4a8c;
+        }
+
+        .question {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .question button {
+            font-size: 1.2rem;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .question .yes-button {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .question .no-button {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+
+        .question .no-button:hover {
+            transform: translateX(20px);
+        }
+
         footer {
             margin-top: 2rem;
             text-align: center;
@@ -75,12 +163,33 @@
             font-size: 0.9rem;
         }
     </style>
+    <script>
+        function moveNoButton() {
+            const noButton = document.querySelector('.no-button');
+            const container = noButton.parentElement;
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            const newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
+            const newTop = Math.random() * (containerHeight - noButton.offsetHeight);
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newLeft}px`;
+            noButton.style.top = `${newTop}px`;
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Hace cuanto no escribes?</h1>
     </header>
     <main>
+        <div class="hidden-icons">
+            <img src="bob-esponja.png" alt="Bob Esponja">
+            <img src="dory.png" alt="Dory">
+            <img src="heart.png" alt="Corazón blanco">
+            <img src="heart.png" alt="Corazón blanco repetido">
+        </div>
+
         <div class="card">
             <p>
                 Hace mucho que no escribo algo así, pero aquí estoy, intentando ordenar el caos de lo que siento.
@@ -96,6 +205,23 @@
             <p>
                 Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo.
             </p>
+            <img src="carta-03-12.png" alt="Foto de la carta para abrir el 03/12">
+        </div>
+        <div class="sunflowers">
+            <img src="sunflower1.png" alt="Girasol 1">
+            <img src="sunflower2.png" alt="Girasol 2">
+            <img src="sunflower3.png" alt="Girasol 3">
+        </div>
+        <div class="quote">
+            "Si no sales, hazme una llamada, yo cambio los planes (au)<br>
+            Voy hasta tu casa cruzando lo' mares (yeah)<br>
+            A 150 sin mirar las señales"
+            <span>- Rels B</span>
+        </div>
+        <div class="question">
+            <p>Me extrañas?</p>
+            <button class="yes-button">Sí</button>
+            <button class="no-button" onmouseover="moveNoButton()">No</button>
         </div>
     </main>
     <footer>
