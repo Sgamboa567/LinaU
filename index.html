@@ -57,7 +57,7 @@
             border-radius: 8px;
         }
 
-        .icon-container {
+        .heart-icons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -65,37 +65,10 @@
             margin-top: 1rem;
         }
 
-        .icon-container img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .hidden-icons img {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            opacity: 0.6;
-        }
-
-        .hidden-icons img:nth-child(1) {
-            top: 10%;
-            left: 5%;
-        }
-
-        .hidden-icons img:nth-child(2) {
-            top: 20%;
-            right: 10%;
-        }
-
-        .hidden-icons img:nth-child(3) {
-            bottom: 15%;
-            left: 20%;
-        }
-
-        .hidden-icons img:nth-child(4) {
-            bottom: 10%;
-            right: 15%;
+        .heart-icons span {
+            font-size: 2rem;
+            color: #ffffff;
+            text-shadow: 0 0 5px #ccc;
         }
 
         .sunflowers {
@@ -105,10 +78,25 @@
             margin: 2rem auto;
         }
 
-        .sunflowers img {
+        .sunflowers div {
             width: 80px;
             height: 80px;
+            background: radial-gradient(circle, #fef200, #ff8800);
+            border-radius: 50%;
+            position: relative;
             margin: 0 10px;
+        }
+
+        .sunflowers div:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: #654321;
+            border-radius: 50%;
         }
 
         .quote {
@@ -129,6 +117,8 @@
         .question {
             text-align: center;
             margin-top: 2rem;
+            position: relative;
+            height: 100px;
         }
 
         .question button {
@@ -149,11 +139,14 @@
         .question .no-button {
             background-color: #f44336;
             color: white;
-            position: relative;
+            position: absolute;
         }
 
-        .question .no-button:hover {
-            transform: translateX(20px);
+        .push-message {
+            display: none;
+            font-size: 1.5rem;
+            color: #4caf50;
+            margin-top: 1rem;
         }
 
         footer {
@@ -166,66 +159,64 @@
     <script>
         function moveNoButton() {
             const noButton = document.querySelector('.no-button');
-            const container = noButton.parentElement;
+            const container = document.querySelector('.question');
             const containerWidth = container.offsetWidth;
             const containerHeight = container.offsetHeight;
+
             const newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
             const newTop = Math.random() * (containerHeight - noButton.offsetHeight);
 
-            noButton.style.position = 'absolute';
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
+        }
+
+        function showPushMessage() {
+            document.querySelector('.push-message').style.display = 'block';
         }
     </script>
 </head>
 <body>
+    <audio autoplay loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
     <header>
         <h1>Hace cuanto no escribes?</h1>
     </header>
     <main>
-        <div class="hidden-icons">
-            <img src="bob-esponja.png" alt="Bob Esponja">
-            <img src="dory.png" alt="Dory">
-            <img src="heart.png" alt="Corazón blanco">
-            <img src="heart.png" alt="Corazón blanco repetido">
-        </div>
-
         <div class="card">
             <p>
                 Hace mucho que no escribo algo así, pero aquí estoy, intentando ordenar el caos de lo que siento.
-                ¿Extraño a alguien? No lo sé... Esta es la realidad, y no debería querer que fuera diferente, pero, a veces, me pregunto por qué tiene que ser así. 
             </p>
-            <div class="icon-container">
-                <img src="bob-esponja.png" alt="Bob Esponja">
-                <img src="dory.png" alt="Dory">
-                <img src="heart.png" alt="Corazón blanco">
-            </div>
-        </div>
-        <div class="card">
             <p>
-                Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo.
+                ¿Extraño a alguien? No lo sé... Esta es la realidad, y no debería querer que fuera diferente, pero, a veces, me pregunto por qué tiene que ser así. Si te soy sincero, volví a abrir y leer esas cartas, como me lo pediste, que fueran abiertas el 03/12. Creo que seguirán abiertas por muchos años más. En ese instante, te extrañé. Extrañé tus palabras, tus letras, todo lo que me escribías. Extrañé los abrazos, los besos, esas "lamidas" de ojos que solo tú dabas, tu olor, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
+            </p>
+            <p>
+                Es cierto: ya no me conoces, ni yo a ti. Ya no sé si algunas historias o publicaciones son para mí. Aunque lleven nuestro corazón blanco, ya no estoy seguro. Dudo. No es como antes, cuando una señal me envolvía y me decía que era para mí, aunque me lo negaras en la cara. Te conocía demasiado bien.
+            </p>
+            <p>
+                Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo, de esos que son la muestra más pura y grande de afecto. Desearía sentirme rodeado por unos brazos que me hagan pensar que no me van a fallar. Pero no puedo.
+            </p>
+            <p>
+                Te odio. No en el sentido común de la palabra, pero te odio porque te llevaste muchas de mis primeras veces. Y porque quedaron tantas cosas por hacer, tantas experiencias por vivir. Te odio porque no pudimos seguir, porque no pude seguir sintiendo lo que me hacías sentir.
+            </p>
+            <p>
+                Hay tantas preguntas para ti que comienzan con un "por qué"... Y sé que tal vez no tengas respuestas, como solía ser desde el principio.
+            </p>
+            <p>
+                Ya se me están olvidando muchos momentos, pero no olvido tu rostro. Lo veo en otras personas, como si mi mente buscara una versión de ti en cada esquina.
+            </p>
+            <p>
+                Quiero llorar, pero no puedo. Y sí, es verdad: te enamoraste de otro yo. Tal vez ya no tenga sentido seguirte odiando. Después de todo, ni siquiera sabemos si seguirías enamorada de lo que soy hoy.
             </p>
             <img src="carta-03-12.png" alt="Foto de la carta para abrir el 03/12">
         </div>
         <div class="sunflowers">
-            <img src="sunflower1.png" alt="Girasol 1">
-            <img src="sunflower2.png" alt="Girasol 2">
-            <img src="sunflower3.png" alt="Girasol 3">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
         <div class="quote">
             "Si no sales, hazme una llamada, yo cambio los planes (au)<br>
-            Voy hasta tu casa cruzando lo' mares (yeah)<br>
-            A 150 sin mirar las señales"
-            <span>- Rels B</span>
-        </div>
-        <div class="question">
-            <p>Me extrañas?</p>
-            <button class="yes-button">Sí</button>
-            <button class="no-button" onmouseover="moveNoButton()">No</button>
-        </div>
-    </main>
-    <footer>
-        <p>Con cariño y memoria, escrito en un repositorio especial. 💙</p>
-    </footer>
-</body>
-</html>
+            Voy
