@@ -136,17 +136,62 @@
             const container = document.querySelector('.question');
             const containerWidth = container.offsetWidth;
             const containerHeight = container.offsetHeight;
+            const yesButton = document.querySelector('.yes-button');
+
+            // Tamaño del botón "NO"
+            const noButtonWidth = noButton.offsetWidth;
+            const noButtonHeight = noButton.offsetHeight;
+            
+            // Tamaño del botón "Sí"
+            const yesButtonWidth = yesButton.offsetWidth;
+            const yesButtonHeight = yesButton.offsetHeight;
+
+            // Coordenadas del botón "Sí"
+            const yesButtonRect = yesButton.getBoundingClientRect();
+            
+            // Coordenadas de la pregunta
+            const questionRect = container.getBoundingClientRect();
 
             let newLeft, newTop;
             let retry = 0;
+            const margin = 20; // Espacio adicional para evitar superposiciones
 
             do {
-                newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
-                newTop = Math.random() * (containerHeight - noButton.offsetHeight);
-                retry++;
-                if (retry > 10) return; // Prevent infinite loop in case of too many retries
-            } while (retry <= 10);
+                // Calcular nuevas posiciones aleatorias dentro de la caja
+                newLeft = Math.random() * (containerWidth - noButtonWidth - margin);
+                newTop = Math.random() * (containerHeight - noButtonHeight - margin);
 
+                // Asegurarse de que el botón "NO" no se sobreponga al botón "Sí"
+                const noButtonRect = { left: newLeft, top: newTop, width: noButtonWidth, height: noButtonHeight };
+                const yesButtonArea = {
+                    left: yesButtonRect.left - margin,
+                    top: yesButtonRect.top - margin,
+                    right: yesButtonRect.left + yesButtonWidth + margin,
+                    bottom: yesButtonRect.top + yesButtonHeight + margin
+                };
+
+                // Verificar que el nuevo botón "NO" no se superponga al área del botón "Sí"
+                const overlapsWithYesButton = (
+                    noButtonRect.left < yesButtonArea.right &&
+                    noButtonRect.right > yesButtonArea.left &&
+                    noButtonRect.top < yesButtonArea.bottom &&
+                    noButtonRect.bottom > yesButtonArea.top
+                );
+
+                // Verificar que no se salga de la pantalla
+                const outOfBounds = (
+                    newLeft < 0 || 
+                    newTop < 0 || 
+                    newLeft + noButtonWidth > window.innerWidth ||
+                    newTop + noButtonHeight > window.innerHeight
+                );
+
+                retry++;
+
+                // Si no hay superposición y está dentro de los límites de la pantalla, aceptamos la posición
+            } while ((overlapsWithYesButton || outOfBounds) && retry < 10); // Intentar hasta 10 veces si es necesario
+
+            // Si hemos encontrado una posición válida, aplicarla
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
         }
@@ -224,6 +269,7 @@
             <p>¿Me extrañas?</p>
             <button class="yes-button" onclick="showPushMessage()">Sí</button>
             <button class="no-button" onclick="moveNoButton()">No</button>
+            <div class="push-message">¡Lo sabía!</div>
         </div>
     </main>
 
