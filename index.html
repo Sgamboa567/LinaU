@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hace cuanto no escribes?</title>
+    <title>LinaU</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -15,17 +15,19 @@
             overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
+        .background-images {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('girasol.png') repeat, url('heart.png') repeat;
-            background-size: 100px 100px, 50px 50px;
-            opacity: 0.1;
+            pointer-events: none;
             z-index: -1;
+        }
+
+        .background-images img {
+            position: absolute;
+            opacity: 0.1;
         }
 
         header {
@@ -147,6 +149,23 @@
         function showPushMessage() {
             document.querySelector('.push-message').style.display = 'block';
         }
+
+        function createBackgroundImages() {
+            const container = document.querySelector('.background-images');
+            const numImages = 20; // Adjust the number of images as needed
+            const images = ['girasol.png', 'heart.png'];
+
+            for (let i = 0; i < numImages; i++) {
+                const img = document.createElement('img');
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.style.width = `${Math.random() * 50 + 50}px`; // Random width between 50px and 100px
+                img.style.top = `${Math.random() * 100}%`;
+                img.style.left = `${Math.random() * 100}%`;
+                container.appendChild(img);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', createBackgroundImages);
     </script>
 </head>
 <body>
@@ -187,8 +206,8 @@
             <img src="carta-03-12.png" alt="Foto de la carta para abrir el 03/12">
         </div>
         <div class="quote">
-            "Si no sales, hazme una llamada, yo cambio los planes (au)<br>
-            Voy hasta tu casa cruzando lo' mares (yeah)<br>
+            "Si no sales, hazme una llamada, yo cambio los planes<br>
+            Voy hasta tu casa cruzando lo' mares<br>
             A 150 sin mirar las señales"<br>
             <span>- Rels B</span>
         </div>
@@ -204,5 +223,7 @@
     <footer>
         <p>Creado con cariño y un toque de nostalgia.</p>
     </footer>
+
+    <div class="background-images"></div>
 </body>
 </html>
