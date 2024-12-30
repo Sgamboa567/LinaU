@@ -136,8 +136,6 @@
             const container = document.querySelector('.question');
             const containerWidth = container.offsetWidth;
             const containerHeight = container.offsetHeight;
-            const yesButton = document.querySelector('.yes-button');
-            const yesButtonRect = yesButton.getBoundingClientRect();
 
             let newLeft, newTop;
             let retry = 0;
@@ -145,16 +143,8 @@
             do {
                 newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
                 newTop = Math.random() * (containerHeight - noButton.offsetHeight);
-
-                // Ensure no overlap with the "Yes" button
-                const noButtonRect = { top: newTop, left: newLeft, width: noButton.offsetWidth, height: noButton.offsetHeight };
-                const overlapX = (noButtonRect.left < yesButtonRect.left + yesButtonRect.width) && (noButtonRect.left + noButtonRect.width > yesButtonRect.left);
-                const overlapY = (noButtonRect.top < yesButtonRect.top + yesButtonRect.height) && (noButtonRect.top + noButtonRect.height > yesButtonRect.top);
-
-                if (overlapX && overlapY) {
-                    retry++;
-                    if (retry > 10) return; // Prevent infinite loop in case of too many retries
-                }
+                retry++;
+                if (retry > 10) return; // Prevent infinite loop in case of too many retries
             } while (retry <= 10);
 
             noButton.style.left = `${newLeft}px`;
@@ -162,7 +152,7 @@
         }
 
         function showPushMessage() {
-            document.querySelector('.push-message').style.display = 'block';
+            alert("¡Lo sabía! 💖😊");
         }
 
         function createBackgroundImages() {
@@ -233,8 +223,7 @@
         <div class="question">
             <p>¿Me extrañas?</p>
             <button class="yes-button" onclick="showPushMessage()">Sí</button>
-            <button class="no-button" onmouseover="moveNoButton()">No</button>
-            <div class="push-message">¡Lo sabía!</div>
+            <button class="no-button" onclick="moveNoButton()">No</button>
         </div>
     </main>
 
