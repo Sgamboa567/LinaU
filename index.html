@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinaU</title>
+    <title>LinaU2</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -88,11 +88,16 @@
         }
 
         .question {
-            text-align: center;
-            margin-top: 2rem;
-            position: relative;
-            height: 100px;
-        }
+    text-align: center;
+    margin-top: 2rem;
+    position: relative; /* Importante para posicionar los hijos */
+    height: 150px; /* Ajustar según el diseño */
+}
+
+.no-button {
+    position: absolute; /* Permite moverlo dinámicamente */
+}
+
 
         .question button {
             font-size: 1.2rem;
@@ -134,63 +139,22 @@
         function moveNoButton() {
     const noButton = document.querySelector('.no-button');
     const container = document.querySelector('.question');
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-    const yesButton = document.querySelector('.yes-button');
+    const containerRect = container.getBoundingClientRect();
 
     // Tamaño del botón "NO"
     const noButtonWidth = noButton.offsetWidth;
     const noButtonHeight = noButton.offsetHeight;
 
-    // Tamaño del botón "Sí"
-    const yesButtonWidth = yesButton.offsetWidth;
-    const yesButtonHeight = yesButton.offsetHeight;
+    // Calcular nuevas posiciones dentro del contenedor
+    const maxLeft = containerRect.width - noButtonWidth;
+    const maxTop = containerRect.height - noButtonHeight;
 
-    // Coordenadas del botón "Sí"
-    const yesButtonRect = yesButton.getBoundingClientRect();
-    
-    // Coordenadas del contenedor de la pregunta
-    const questionRect = container.getBoundingClientRect();
+    // Generar nuevas coordenadas aleatorias
+    const newLeft = Math.random() * maxLeft;
+    const newTop = Math.random() * maxTop;
 
-    let newLeft, newTop;
-    let retry = 0;
-    const margin = 20; // Espacio adicional para evitar superposiciones
-
-    do {
-        // Calcular nuevas posiciones aleatorias dentro del contenedor
-        newLeft = Math.random() * (containerWidth - noButtonWidth - margin);
-        newTop = Math.random() * (containerHeight - noButtonHeight - margin);
-
-        // Asegurarse de que el botón "NO" no se sobreponga al botón "Sí"
-        const noButtonRect = { left: newLeft, top: newTop, width: noButtonWidth, height: noButtonHeight };
-        const yesButtonArea = {
-            left: yesButtonRect.left - margin,
-            top: yesButtonRect.top - margin,
-            right: yesButtonRect.left + yesButtonWidth + margin,
-            bottom: yesButtonRect.top + yesButtonHeight + margin
-        };
-
-        // Verificar que el nuevo botón "NO" no se superponga al área del botón "Sí"
-        const overlapsWithYesButton = (
-            noButtonRect.left < yesButtonArea.right &&
-            noButtonRect.right > yesButtonArea.left &&
-            noButtonRect.top < yesButtonArea.bottom &&
-            noButtonRect.bottom > yesButtonArea.top
-        );
-
-        // Verificar que no se salga de los límites del contenedor
-        const outOfBounds = (
-            newLeft < 0 || 
-            newTop < 0 || 
-            newLeft + noButtonWidth > containerWidth ||
-            newTop + noButtonHeight > containerHeight
-        );
-
-        retry++;
-
-    } while ((overlapsWithYesButton || outOfBounds) && retry < 10); // Intentar hasta 10 veces si es necesario
-
-    // Si hemos encontrado una posición válida, aplicarla
+    // Aplicar las nuevas posiciones al botón "NO"
+    noButton.style.position = 'absolute';
     noButton.style.left = `${newLeft}px`;
     noButton.style.top = `${newTop}px`;
 }
