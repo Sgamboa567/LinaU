@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hace cuanto no escribes?</title>
+    <title>LinaU</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -140,7 +140,7 @@
             do {
                 newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
                 newTop = Math.random() * (containerHeight - noButton.offsetHeight);
-            } while (newLeft < 150 && newTop < 50); // Ensure it doesn't overlap with the "Yes" button
+            } while (Math.abs(newLeft - noButton.offsetLeft) < 50 && Math.abs(newTop - noButton.offsetTop) < 50); // Ensure it doesn't overlap with the "Yes" button
 
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
@@ -183,9 +183,10 @@
                 Hace mucho que no escribo algo así, pero aquí estoy, intentando ordenar el caos de lo que siento.
             </p>
             <p>
-                ¿Extraño a alguien? No lo sé... Esta es la realidad, y no debería querer que fuera diferente, pero, a veces, me pregunto por qué tiene que ser así. Si te soy sincero, volví a abrir y leer esas cartas, como me lo pediste, que fueran abiertas el 03/12. Creo que seguirán abiertas por muchos años más. En ese instante, te extrañé. Extrañé tus palabras, tus letras, todo lo que me escribías. Extrañé los abrazos, los besos, esas "lamidas" de ojos que solo tú dabas, tu olor, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
+                ¿Extraño a alguien? No lo sé... Esta es la realidad, y no debería querer que fuera diferente, pero, a veces, me pregunto por qué tiene que ser así. Si te soy sincero, volví a abrir y leer esas cartas, como me lo pediste, que fueran abiertas el 03/12.
+            <img src="carta-03-12.jepg" alt="Foto de la carta para abrir el 03/12"> 
+            Creo que seguirán abiertas por muchos años más. En ese instante, te extrañé. Extrañé tus palabras, tus letras, todo lo que me escribías. Extrañé los abrazos, los besos, esas "lamidas" de ojos que solo tú dabas, tu olor, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
             </p>
-            <img src="carta-03-12.png" alt="Foto de la carta para abrir el 03/12">
             <p>
                 Es cierto: ya no me conoces, ni yo a ti. Ya no sé si algunas historias o publicaciones son para mí. Aunque lleven nuestro corazón blanco, ya no estoy seguro. Dudo. No es como antes, cuando una señal me envolvía y me decía que era para mí, aunque me lo negaras en la cara. Te conocía demasiado bien.
             </p>
