@@ -15,6 +15,20 @@
             overflow-x: hidden;
         }
 
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('girasol.png') no-repeat, url('heart.png') no-repeat;
+            background-size: 100px 100px, 50px 50px;
+            background-position: 10% 20%, 80% 70%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
         header {
             background-color: #f0f4ff;
             text-align: center;
@@ -126,6 +140,13 @@
             position: absolute;
         }
 
+        .push-message {
+            display: none;
+            font-size: 1.5rem;
+            color: #4caf50;
+            margin-top: 1rem;
+        }
+
         footer {
             margin-top: 2rem;
             text-align: center;
@@ -140,15 +161,18 @@
             const containerWidth = container.offsetWidth;
             const containerHeight = container.offsetHeight;
 
-            const newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
-            const newTop = Math.random() * (containerHeight - noButton.offsetHeight);
+            let newLeft, newTop;
+            do {
+                newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
+                newTop = Math.random() * (containerHeight - noButton.offsetHeight);
+            } while (newLeft < 100 && newTop < 50); // Ensure it doesn't overlap with the "Yes" button
 
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
         }
 
         function showPushMessage() {
-            alert('¡Lo sabía!');
+            document.querySelector('.push-message').style.display = 'block';
         }
     </script>
 </head>
@@ -195,8 +219,8 @@
             <img src="girasol.png" alt="Girasol">
         </div>
         <div class="quote">
-            "Si no sales, hazme una llamada, yo cambio los planes <br>
-            Voy hasta tu casa cruzando lo' mares <br>
+            "Si no sales, hazme una llamada, yo cambio los planes (au)<br>
+            Voy hasta tu casa cruzando lo' mares (yeah)<br>
             A 150 sin mirar las señales"<br>
             <span>- Rels B</span>
         </div>
@@ -205,6 +229,7 @@
             <p>¿Me extrañas?</p>
             <button class="yes-button" onclick="showPushMessage()">Sí</button>
             <button class="no-button" onmouseover="moveNoButton()">No</button>
+            <div class="push-message">¡Lo sabía!</div>
         </div>
         <div class="heart-icons">
             <img src="heart.png" alt="Corazón">
