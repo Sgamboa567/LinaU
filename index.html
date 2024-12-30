@@ -113,6 +113,7 @@
             background-color: #f44336;
             color: white;
             position: absolute;
+            transition: top 0.2s, left 0.2s;
         }
 
         .push-message {
@@ -135,12 +136,26 @@
             const container = document.querySelector('.question');
             const containerWidth = container.offsetWidth;
             const containerHeight = container.offsetHeight;
+            const yesButton = document.querySelector('.yes-button');
+            const yesButtonRect = yesButton.getBoundingClientRect();
 
             let newLeft, newTop;
+            let retry = 0;
+
             do {
                 newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
                 newTop = Math.random() * (containerHeight - noButton.offsetHeight);
-            } while (Math.abs(newLeft - noButton.offsetLeft) < 50 && Math.abs(newTop - noButton.offsetTop) < 50); // Ensure it doesn't overlap with the "Yes" button
+
+                // Ensure no overlap with the "Yes" button
+                const noButtonRect = { top: newTop, left: newLeft, width: noButton.offsetWidth, height: noButton.offsetHeight };
+                const overlapX = (noButtonRect.left < yesButtonRect.left + yesButtonRect.width) && (noButtonRect.left + noButtonRect.width > yesButtonRect.left);
+                const overlapY = (noButtonRect.top < yesButtonRect.top + yesButtonRect.height) && (noButtonRect.top + noButtonRect.height > yesButtonRect.top);
+
+                if (overlapX && overlapY) {
+                    retry++;
+                    if (retry > 10) return; // Prevent infinite loop in case of too many retries
+                }
+            } while (retry <= 10);
 
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
@@ -152,13 +167,13 @@
 
         function createBackgroundImages() {
             const container = document.querySelector('.background-images');
-            const numImages = 20; // Adjust the number of images as needed
+            const numImages = 20;
             const images = ['girasol.png', 'heart.png'];
 
             for (let i = 0; i < numImages; i++) {
                 const img = document.createElement('img');
                 img.src = images[Math.floor(Math.random() * images.length)];
-                img.style.width = `${Math.random() * 50 + 50}px`; // Random width between 50px and 100px
+                img.style.width = `${Math.random() * 50 + 50}px`;
                 img.style.top = `${Math.random() * 100}%`;
                 img.style.left = `${Math.random() * 100}%`;
                 container.appendChild(img);
@@ -185,7 +200,7 @@
             <p>
                 ¿Extraño a alguien? No lo sé... Esta es la realidad, y no debería querer que fuera diferente, pero, a veces, me pregunto por qué tiene que ser así. Si te soy sincero, volví a abrir y leer esas cartas, como me lo pediste, que fueran abiertas el 03/12.
             </p>
-                <img src="carta-03-12.jpeg" alt="Foto de la carta para abrir el 03/12"> 
+            <img src="carta-03-12.jpeg" alt="Foto de la carta para abrir el 03/12"> 
             <p>
                 Creo que seguiré abriendolas por muchos años más. En ese instante, te extrañé. Extrañé tus boca, tus manos, tus labios, tu cuerpo. Extrañé tus palabras, tus letras, tus besos, tu olor, esas "lamidas" de ojos, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
             </p>
