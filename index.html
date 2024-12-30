@@ -140,7 +140,7 @@
             do {
                 newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
                 newTop = Math.random() * (containerHeight - noButton.offsetHeight);
-            } while (newLeft < 150 && newTop < 50); // Ensure it doesn't overlap with the "Yes" button
+            } while (newLeft < 100 && newTop < 50); // Ensure it doesn't overlap with the "Yes" button
 
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
