@@ -22,9 +22,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('girasol.png') no-repeat, url('heart.png') no-repeat;
+            background: url('girasol.png') repeat, url('heart.png') repeat;
             background-size: 100px 100px, 50px 50px;
-            background-position: 10% 20%, 80% 70%;
             opacity: 0.1;
             z-index: -1;
         }
@@ -69,32 +68,6 @@
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-        }
-
-        .heart-icons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        .heart-icons img {
-            width: 40px;
-            height: 40px;
-        }
-
-        .sunflowers {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 2rem auto;
-        }
-
-        .sunflowers img {
-            width: 80px;
-            height: 80px;
-            margin: 0 10px;
         }
 
         .quote {
@@ -165,7 +138,7 @@
             do {
                 newLeft = Math.random() * (containerWidth - noButton.offsetWidth);
                 newTop = Math.random() * (containerHeight - noButton.offsetHeight);
-            } while (newLeft < 100 && newTop < 50); // Ensure it doesn't overlap with the "Yes" button
+            } while (newLeft < 150 && newTop < 50); // Ensure it doesn't overlap with the "Yes" button
 
             noButton.style.left = `${newLeft}px`;
             noButton.style.top = `${newTop}px`;
@@ -213,11 +186,6 @@
             </p>
             <img src="carta-03-12.png" alt="Foto de la carta para abrir el 03/12">
         </div>
-        <div class="sunflowers">
-            <img src="girasol.png" alt="Girasol">
-            <img src="girasol.png" alt="Girasol">
-            <img src="girasol.png" alt="Girasol">
-        </div>
         <div class="quote">
             "Si no sales, hazme una llamada, yo cambio los planes (au)<br>
             Voy hasta tu casa cruzando lo' mares (yeah)<br>
@@ -230,11 +198,6 @@
             <button class="yes-button" onclick="showPushMessage()">Sí</button>
             <button class="no-button" onmouseover="moveNoButton()">No</button>
             <div class="push-message">¡Lo sabía!</div>
-        </div>
-        <div class="heart-icons">
-            <img src="heart.png" alt="Corazón">
-            <img src="heart.png" alt="Corazón">
-            <img src="heart.png" alt="Corazón">
         </div>
     </main>
 
