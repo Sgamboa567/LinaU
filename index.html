@@ -65,10 +65,9 @@
             margin-top: 1rem;
         }
 
-        .heart-icons span {
-            font-size: 2rem;
-            color: #ffffff;
-            text-shadow: 0 0 5px #ccc;
+        .heart-icons img {
+            width: 40px;
+            height: 40px;
         }
 
         .sunflowers {
@@ -78,25 +77,10 @@
             margin: 2rem auto;
         }
 
-        .sunflowers div {
+        .sunflowers img {
             width: 80px;
             height: 80px;
-            background: radial-gradient(circle, #fef200, #ff8800);
-            border-radius: 50%;
-            position: relative;
             margin: 0 10px;
-        }
-
-        .sunflowers div:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            background: #654321;
-            border-radius: 50%;
         }
 
         .quote {
@@ -142,13 +126,6 @@
             position: absolute;
         }
 
-        .push-message {
-            display: none;
-            font-size: 1.5rem;
-            color: #4caf50;
-            margin-top: 1rem;
-        }
-
         footer {
             margin-top: 2rem;
             text-align: center;
@@ -171,7 +148,7 @@
         }
 
         function showPushMessage() {
-            document.querySelector('.push-message').style.display = 'block';
+            alert('¡Lo sabía!');
         }
     </script>
 </head>
@@ -213,14 +190,14 @@
             <img src="carta-03-12.png" alt="Foto de la carta para abrir el 03/12">
         </div>
         <div class="sunflowers">
-            <div></div>
-            <div></div>
-            <div></div>
+            <img src="girasol.png" alt="Girasol">
+            <img src="girasol.png" alt="Girasol">
+            <img src="girasol.png" alt="Girasol">
         </div>
         <div class="quote">
-            "Si no sales, hazme una llamada, yo cambio los planes (au)<br>
-            Voy hasta tu casa cruzando lo' mares (yeah)<br>
-            A 150 sin mirar las señales\"<br>
+            "Si no sales, hazme una llamada, yo cambio los planes <br>
+            Voy hasta tu casa cruzando lo' mares <br>
+            A 150 sin mirar las señales"<br>
             <span>- Rels B</span>
         </div>
 
@@ -228,7 +205,11 @@
             <p>¿Me extrañas?</p>
             <button class="yes-button" onclick="showPushMessage()">Sí</button>
             <button class="no-button" onmouseover="moveNoButton()">No</button>
-            <div class="push-message">¡Lo sabía!</div>
+        </div>
+        <div class="heart-icons">
+            <img src="heart.png" alt="Corazón">
+            <img src="heart.png" alt="Corazón">
+            <img src="heart.png" alt="Corazón">
         </div>
     </main>
 
