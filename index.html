@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinaU</title>
+    <title>Hace cuanto no escribes?</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -88,16 +88,15 @@
         }
 
         .question {
-    text-align: center;
-    margin-top: 2rem;
-    position: relative; /* Importante para posicionar los hijos */
-    height: 150px; /* Ajustar según el diseño */
-}
+            text-align: center;
+            margin-top: 2rem;
+            position: relative;
+            height: 150px;
+        }
 
-.no-button {
-    position: absolute; /* Permite moverlo dinámicamente */
-}
-
+        .no-button {
+            position: absolute;
+        }
 
         .question button {
             font-size: 1.2rem;
@@ -137,29 +136,26 @@
     </style>
     <script>
         function moveNoButton() {
-    const noButton = document.querySelector('.no-button');
-    const container = document.querySelector('.question');
-    const containerRect = container.getBoundingClientRect();
+            const noButton = document.querySelector('.no-button');
+            const container = document.querySelector('.question');
+            const containerRect = container.getBoundingClientRect();
 
-    // Tamaño del botón "NO"
-    const noButtonWidth = noButton.offsetWidth;
-    const noButtonHeight = noButton.offsetHeight;
+            const noButtonWidth = noButton.offsetWidth;
+            const noButtonHeight = noButton.offsetHeight;
 
-    // Calcular nuevas posiciones dentro del contenedor
-    const maxLeft = containerRect.width - noButtonWidth;
-    const maxTop = containerRect.height - noButtonHeight;
+            const maxLeft = containerRect.width - noButtonWidth;
+            const maxTop = containerRect.height - noButtonHeight;
 
-    // Generar nuevas coordenadas aleatorias
-    const newLeft = Math.random() * maxLeft;
-    const newTop = Math.random() * maxTop;
+            const newLeft = Math.random() * maxLeft;
+            const newTop = Math.random() * maxTop;
 
-    // Aplicar las nuevas posiciones al botón "NO"
-    noButton.style.position = 'absolute';
-    noButton.style.left = `${newLeft}px`;
-    noButton.style.top = `${newTop}px`;
-}
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newLeft}px`;
+            noButton.style.top = `${newTop}px`;
+        }
+
         function showPushMessage() {
-            alert("¡Lo sabía! 💖😊");
+            alert("¡Lo sabía! 😍😊");
         }
 
         function createBackgroundImages() {
@@ -181,10 +177,13 @@
     </script>
 </head>
 <body>
-    <audio autoplay loop>
+    <audio id="background-audio" loop>
         <source src="song.mp3" type="audio/mpeg">
+        <source src="song.ogg" type="audio/ogg">
         Tu navegador no soporta el elemento de audio.
     </audio>
+
+    <button onclick="document.getElementById('background-audio').play()" style="position:fixed;top:10px;right:10px;padding:10px;background:#4caf50;color:white;border:none;border-radius:5px;cursor:pointer;z-index:1000;">Reproducir música</button>
 
     <header>
         <h1>Hace cuanto no escribes?</h1>
@@ -199,13 +198,13 @@
             </p>
             <img src="carta-03-12.jpeg" alt="Foto de la carta para abrir el 03/12"> 
             <p>
-                Creo que seguiré abriendolas por muchos años más. En ese instante, te extrañé. Extrañé tus boca, tus manos, tus labios, tu cuerpo. Extrañé tus palabras, tus letras, tus besos, tu olor, esas "lamidas" de ojos, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
+                Creo que seguiré abriendolas por muchos años más. En ese instante, te extrañé. Extrañé tu boca, tus manos, tus labios, tu cuerpo. Extrañé tus palabras, tus letras, tus besos, tu olor, esas "lamidas" de ojos, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
             </p>
             <p>
                 Es cierto: ya no me conoces, ni yo a ti. Ya no sé si algunas historias o publicaciones son para mí. Aunque lleven nuestro corazón blanco, ya no estoy seguro. Dudo. No es como antes, cuando una sensación me envolvía y me decía que era para mí, aunque me lo negaras en la cara. Te conocía demasiado bien.
             </p>
             <p>
-                Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo, de esos que son la muestra más pura y grande de afecto. Desearía sentirme rodeado por unos brazos que me hagan pensar que no me van a fallar. Pero no puedo.
+                Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo, de esos que son la muestra más pura y grande de afecto. Desearía sentirme rodeado por unos brazos que me hagan pensar que no me van a fallar.                
             </p>
             <p>
                 Te odio. No en el sentido común de la palabra, pero te odio porque te llevaste muchas de mis primeras veces. Y porque quedaron tantas cosas por hacer, tantas experiencias por vivir. Te odio porque no pudimos seguir, porque no pude seguir sintiendo lo que me hacías sentir.
