@@ -173,29 +173,17 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('background-audio');
-    
-    // Intentar reproducir automáticamente
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            // Si falla, esperar interacción del usuario
-            document.addEventListener('click', () => {
-                audio.play();
-            }, { once: true });
-        });
-    }
-});
+        document.addEventListener('DOMContentLoaded', createBackgroundImages);
     </script>
 </head>
 <body>
-    <audio id="background-audio" autoplay loop>
+    <audio id="background-audio" loop>
         <source src="song.mp3" type="audio/mpeg">
         <source src="song.ogg" type="audio/ogg">
         Tu navegador no soporta el elemento de audio.
     </audio>
+
+    <button onclick="document.getElementById('background-audio').play()" style="position:fixed;top:10px;right:10px;padding:10px;background:#4caf50;color:white;border:none;border-radius:5px;cursor:pointer;z-index:1000;">Reproducir música</button>
 
     <header>
         <h1>Hace cuanto no escribes?</h1>
@@ -216,7 +204,7 @@
                 Es cierto: ya no me conoces, ni yo a ti. Ya no sé si algunas historias o publicaciones son para mí. Aunque lleven nuestro corazón blanco, ya no estoy seguro. Dudo. No es como antes, cuando una sensación me envolvía y me decía que era para mí, aunque me lo negaras en la cara. Te conocía demasiado bien.
             </p>
             <p>
-                Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo, de esos que son la muestra más pura y grande de afecto. Desearía sentirme rodeado por unos brazos que me hagan pensar que no me van a fallar. Pero no puedo.
+                Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo, de esos que son la muestra más pura y grande de afecto. Desearía sentirme rodeado por unos brazos que me hagan pensar que no me van a fallar.                
             </p>
             <p>
                 Te odio. No en el sentido común de la palabra, pero te odio porque te llevaste muchas de mis primeras veces. Y porque quedaron tantas cosas por hacer, tantas experiencias por vivir. Te odio porque no pudimos seguir, porque no pude seguir sintiendo lo que me hacías sentir.
@@ -251,4 +239,3 @@
     <div class="background-images"></div>
 </body>
 </html>
-
