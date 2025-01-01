@@ -174,12 +174,20 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            createBackgroundImages();
-            const audio = document.getElementById('background-audio');
-            audio.play().catch(error => {
-                console.warn("El usuario debe interactuar con la página para habilitar el audio automático.");
-            });
+    const audio = document.getElementById('background-audio');
+    
+    // Intentar reproducir automáticamente
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            // Si falla, esperar interacción del usuario
+            document.addEventListener('click', () => {
+                audio.play();
+            }, { once: true });
         });
+    }
+});
     </script>
 </head>
 <body>
