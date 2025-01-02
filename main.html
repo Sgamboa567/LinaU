@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f7f8fc, #ffffff);
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .background-images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .background-images img {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        header {
+            background-color: #f0f4ff;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #4a4a8c;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: 1rem auto;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0 0 1rem;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .quote {
+            margin: 2rem auto;
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        .quote span {
+            display: block;
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #4a4a8c;
+        }
+
+        .question {
+            text-align: center;
+            margin-top: 2rem;
+            position: relative;
+            height: 150px;
+        }
+
+        .no-button {
+            position: absolute;
+        }
+
+        .question button {
+            font-size: 1.2rem;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .question .yes-button {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .question .no-button {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            transition: top 0.2s, left 0.2s;
+        }
+
+        .push-message {
+            display: none;
+            font-size: 1.5rem;
+            color: #4caf50;
+            margin-top: 1rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .intro button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .intro button:hover {
+            transform: scale(1.05);
+        }
+
+        #background-audio {
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function playMusic() {
+            const audio = document.getElementById('background-audio');
+            audio.play();
+            document.querySelector('.intro').classList.add('hidden');
+            document.querySelector('.main-content').classList.remove('hidden');
+            alert("Música activada, disfruta la experiencia! 🎵");
+        }
+
+        function moveNoButton() {
+            const noButton = document.querySelector('.no-button');
+            const container = document.querySelector('.question');
+            const containerRect = container.getBoundingClientRect();
+
+            const noButtonWidth = noButton.offsetWidth;
+            const noButtonHeight = noButton.offsetHeight;
+
+            const maxLeft = containerRect.width - noButtonWidth;
+            const maxTop = containerRect.height - noButtonHeight;
+
+            const newLeft = Math.random() * maxLeft;
+            const newTop = Math.random() * maxTop;
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newLeft}px`;
+            noButton.style.top = `${newTop}px`;
+        }
+
+        function showPushMessage() {
+            alert("¡Lo sabía! 😍😊");
+        }
+
+        function createBackgroundImages() {
+            const container = document.querySelector('.background-images');
+            const numImages = 20;
+            const images = ['girasol.png', 'heart.png'];
+
+            for (let i = 0; i < numImages; i++) {
+                const img = document.createElement('img');
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.style.width = `${Math.random() * 50 + 50}px`;
+                img.style.top = `${Math.random() * 100}%`;
+                img.style.left = `${Math.random() * 100}%`;
+                container.appendChild(img);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', createBackgroundImages);
+    </script>
+</head>
+<body>
+    <div class="intro">
+        <h1>¡Bienvenida!</h1>
+        <p>Presiona el botón a continuación para reproducir la música y disfrutar de la experiencia completa.</p>
+        <button onclick="playMusic()">Reproducir Música</button>
+    </div>
+
+    <div class="main-content hidden">
+        <audio id="background-audio" loop>
+            <source src="song.mp3" type="audio/mpeg">
+            <source src="song.ogg" type="audio/ogg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+
+        <header>
+            <h1>Hace cuanto no escribes?</h1>
+        </header>
+        <main>
+            <div class="card">
+                <p>
+                    Hace mucho que no escribo algo así, pero aquí estoy, intentando ordenar el caos de lo que siento.
+                </p>
+                <p>
+                    ¿Extraño a alguien? No lo sé... Esta es la realidad, y no debería querer que fuera diferente, pero, a veces, me pregunto por qué tiene que ser así. Si te soy sincero, volví a abrir y leer esas cartas, como me lo pediste, que fueran abiertas el 03/12.
+                </p>
+                <img src="carta-03-12.jpeg" alt="Foto de la carta para abrir el 03/12"> 
+                <p>
+                    Creo que seguiré abriendolas por muchos años más. En ese instante, te extrañé. Extrañé tu boca, tus manos, tus labios, tu cuerpo. Extrañé tus palabras, tus letras, tus besos, tu olor, esas "lamidas" de ojos, y esas sonrisas que, aunque hoy todavía me río mucho, contigo eran diferentes.
+                </p>
+                <p>
+            Es cierto: ya no me conoces, ni yo a ti. Ya no sé si algunas historias o publicaciones son para mí. Aunque lleven nuestro corazón blanco, ya no estoy seguro. Dudo. No es como antes, cuando una sensación me envolvía y me decía que era para mí, aunque me lo negaras en la cara. Te conocía demasiado bien.
+        </p>
+        <p>
+            Te cuento algo: no he podido amar otra vez. Hiciste que desconfiara de todas, y al final, siempre termina siendo verdad. Tal vez eso sea bueno, pero también desearía volver a sentir lo cálido de un abrazo, de esos que son la muestra más pura y grande de afecto. Desearía sentirme rodeado por unos brazos que me hagan pensar que no me van a fallar.                
+        </p>
+        <p>
+            Te odio. No en el sentido común de la palabra, pero te odio porque te llevaste muchas de mis primeras veces. Y porque quedaron tantas cosas por hacer, tantas experiencias por vivir. Te odio porque no pudimos seguir, porque no pude seguir sintiendo lo que me hacías sentir.
+        </p>
+        <p>
+            Hay tantas preguntas para ti que comienzan con un "por qué"... Y sé que tal vez no tengas respuestas, como solía ser desde el principio.
+        </p>
+        <p>
+            Ya se me están olvidando muchos momentos, pero no olvido tu rostro. Lo veo en otras personas, como si mi mente buscara una versión de ti en cada esquina.
+        </p>
+        <p>
+            Quiero llorar, pero no puedo. Y sí, es verdad: te enamoraste de otro yo. Tal vez ya no tenga sentido seguirte odiando. Después de todo, ni siquiera sabemos si seguirías enamorada de lo que soy hoy.
+        </p>
+    </div>
+    <div class="quote">
+        "Te Amito"<br>
+        <span>- Lina U</span>
+    </div>
+
+    <div class="question">
+        <p>¿Me extrañas?</p>
+        <button class="yes-button" onclick="showPushMessage()">Sí</button>
+        <button class="no-button" onclick="moveNoButton()">No</button>
+        <div class="push-message">¡Lo sabía!</div>
+    </div>
+</main>
+
+<footer>
+    <p>Creado con cariño y un toque de nostalgia.</p>
+</footer>
+
+<div class="background-images"></div>
+</body>
+</html>
